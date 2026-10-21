@@ -1,0 +1,34 @@
+name: Release Miniapp
+
+on:
+  push:
+    tags: ['v*']  # 只要推送以 v 开头的 Tag 就会触发（比如 v1.0.0）
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout miniapp code
+        uses: actions/checkout@v4
+
+      # 这里未来可以加一步：自动上传微信体验版
+
+      - name: Checkout product-data
+        uses: actions/checkout@v4
+        with:
+          repository: wangjungithubnew/product-data
+          token: ${{ secrets.DATA_REPO_TOKEN }}
+          path: product-data
+
+      - name: Update products.json
+        run: |
+          cd product-data
+          # 调用之前写好的脚本，传入产品名(miniapp)和版本号(自动去掉v)
+          node scripts/update.js miniapp ${GITHUB_REF_NAME#v}
+          
+          # 提交并推送回 product-data 仓库
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add products.json
+          git commit -m "chore: auto update miniapp version to ${GITHUB_REF_NAME#v}" || echo "No changes to commit"
+          git push

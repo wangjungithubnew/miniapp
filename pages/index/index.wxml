@@ -1,0 +1,99 @@
+<view class="page {{immersive ? 'immersive' : ''}}">
+
+<!-- 书写区 -->
+<view class="board">
+  <canvas
+  type="2d"
+  id="signCanvas"
+  class="sign-canvas"
+    disable-scroll="{{true}}"
+    bindtouchstart="onTouchStart"
+    bindtouchmove="onTouchMove"
+    bindtouchend="onTouchEnd"
+    bindtouchcancel="onTouchEnd"
+   style="position: absolute; left: -25rpx; top: 0rpx"></canvas>
+
+  <view class="placeholder" wx:if="{{isEmpty}}">
+    <view class="ph-line"></view>
+    <text class="ph-text">在此区域手写签名</text>
+  </view>
+
+  <view class="exit-full" wx:if="{{immersive}}" bindtap="toggleFull">退出全屏</view>
+</view>
+
+<!-- 控制面板 -->
+<view class="panel" wx:if="{{!immersive}}">
+
+  <!-- 颜色 -->
+  <view class="row">
+    <text class="row-label">颜色</text>
+    <view class="colors">
+      <view
+        wx:for="{{presetColors}}"
+        wx:key="*this"
+        class="color-dot {{(!isCustom && color === item) ? 'active' : ''}}"
+        style="background: {{item}}"
+        data-color="{{item}}"
+        bindtap="onPickColor"
+      ></view>
+      <view class="color-dot custom {{isCustom ? 'active' : ''}}" bindtap="toggleCustom">
+        <view class="custom-inner" style="background: {{customColor}}"></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 自定义取色 -->
+  <view class="custom-panel" wx:if="{{showCustom}}">
+    <view class="bar-wrap">
+      <view class="hue-bar" id="hueBar" bindtouchstart="onHueTouch" bindtouchmove="onHueTouch">
+        <view class="thumb" style="left: {{huePos}}px"></view>
+      </view>
+    </view>
+    <view class="bar-wrap">
+      <view class="light-bar" id="lightBar" style="{{lightBarStyle}}" bindtouchstart="onLightTouch" bindtouchmove="onLightTouch">
+        <view class="thumb" style="left: {{lightPos}}px"></view>
+      </view>
+    </view>
+    <view class="custom-preview">
+      <view class="preview-box" style="background: {{customColor}}"></view>
+      <text class="hex">{{customColor}}</text>
+      <view class="use-btn" bindtap="useCustomColor">使用该颜色</view>
+    </view>
+  </view>
+
+  <!-- 粗细 -->
+  <view class="row">
+    <text class="row-label">粗细</text>
+    <slider
+      class="slider"
+      min="1"
+      max="20"
+      step="1"
+      value="{{lineWidth}}"
+      block-size="20"
+      activeColor="#07c160"
+      backgroundColor="#e6e8eb"
+      bindchanging="onWidthChanging"
+      bindchange="onWidthChange"
+    />
+    <text class="width-val">{{lineWidth}}</text>
+  </view>
+
+  <!-- 笔迹预览 -->
+  <view class="preview-wrap">
+    <view class="preview-stroke" style="height: {{lineWidth}}px; background: {{color}};"></view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="actions">
+    <view class="btn" hover-class="btn-hover" bindtap="undo">撤销</view>
+    <view class="btn" hover-class="btn-hover" bindtap="clear">重写</view>
+    <view class="btn primary" hover-class="btn-hover" bindtap="save">保存到相册</view>
+  </view>
+
+  <view class="actions second">
+    <view class="btn ghost" hover-class="btn-hover" bindtap="toggleFull">全屏书写</view>
+  </view>
+
+</view>
+</view>

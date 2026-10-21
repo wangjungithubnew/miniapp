@@ -1,0 +1,289 @@
+/* pages/index/index.wxss */
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* ---------- 书写区 ---------- */
+.board {
+  position: relative;
+  flex: 1;
+  margin: 20rpx;
+  background: #ffffff;
+  border-radius: 24rpx;
+  overflow: hidden;
+  box-shadow: 0 6rpx 24rpx rgba(0, 0, 0, 0.06);
+  min-height: 0;
+}
+
+.page.immersive .board {
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.sign-canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.placeholder {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.ph-line {
+  width: 56%;
+  height: 2rpx;
+  background: #e9ebef;
+  margin-bottom: 30rpx;
+}
+
+.ph-text {
+  font-size: 28rpx;
+  color: #c6cad2;
+  letter-spacing: 2rpx;
+}
+
+.exit-full {
+  position: absolute;
+  right: 32rpx;
+  top: 32rpx;
+  padding: 12rpx 30rpx;
+  background: rgba(0, 0, 0, 0.42);
+  color: #fff;
+  font-size: 26rpx;
+  border-radius: 999rpx;
+  z-index: 10;
+}
+
+/* ---------- 面板 ---------- */
+.panel {
+  background: #fff;
+  padding: 28rpx 28rpx calc(24rpx + env(safe-area-inset-bottom));
+  border-radius: 28rpx 28rpx 0 0;
+  box-shadow: 0 -4rpx 24rpx rgba(0, 0, 0, 0.05);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 22rpx;
+}
+
+.row-label {
+  width: 80rpx;
+  flex-shrink: 0;
+  font-size: 26rpx;
+  color: #8a8f99;
+}
+
+/* 颜色 */
+.colors {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.color-dot {
+  position: relative;
+  width: 52rpx;
+  height: 52rpx;
+  border-radius: 50%;
+  margin-right: 22rpx;
+  box-sizing: border-box;
+  transition: transform 0.15s;
+}
+
+.color-dot.active {
+  transform: scale(1.08);
+}
+
+.color-dot.active::after {
+  content: '';
+  position: absolute;
+  left: -8rpx;
+  top: -8rpx;
+  right: -8rpx;
+  bottom: -8rpx;
+  border: 3rpx solid #07c160;
+  border-radius: 50%;
+}
+
+.color-dot.custom {
+  background: linear-gradient(135deg, #ff4d4f, #fa8c16, #fadb14, #52c41a, #13c2c2, #1890ff, #722ed1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0;
+}
+
+.custom-inner {
+  width: 34rpx;
+  height: 34rpx;
+  border-radius: 50%;
+  border: 3rpx solid #ffffff;
+  box-sizing: border-box;
+}
+
+/* 自定义取色面板 */
+.custom-panel {
+  background: #f7f8fa;
+  border-radius: 18rpx;
+  padding: 28rpx 24rpx 22rpx;
+  margin-bottom: 24rpx;
+}
+
+.bar-wrap {
+  padding: 0 6rpx;
+}
+
+.hue-bar,
+.light-bar {
+  position: relative;
+  height: 36rpx;
+  border-radius: 18rpx;
+  margin-bottom: 30rpx;
+}
+
+.hue-bar {
+  background: linear-gradient(
+    to right,
+    #ff0000 0%,
+    #ffff00 17%,
+    #00ff00 33%,
+    #00ffff 50%,
+    #0000ff 67%,
+    #ff00ff 83%,
+    #ff0000 100%
+  );
+}
+
+.thumb {
+  position: absolute;
+  top: 50%;
+  width: 44rpx;
+  height: 44rpx;
+  border-radius: 50%;
+  background: #fff;
+  border: 4rpx solid #ffffff;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.28);
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+}
+
+.custom-preview {
+  display: flex;
+  align-items: center;
+}
+
+.preview-box {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 14rpx;
+  border: 2rpx solid rgba(0, 0, 0, 0.08);
+}
+
+.hex {
+  flex: 1;
+  margin-left: 22rpx;
+  font-size: 28rpx;
+  color: #4b5058;
+  letter-spacing: 1rpx;
+}
+
+.use-btn {
+  padding: 12rpx 30rpx;
+  background: #07c160;
+  color: #fff;
+  font-size: 26rpx;
+  border-radius: 999rpx;
+}
+
+/* 粗细 */
+.slider {
+  flex: 1;
+  margin: 0 18rpx;
+}
+
+.width-val {
+  width: 56rpx;
+  text-align: right;
+  font-size: 28rpx;
+  color: #4b5058;
+}
+
+/* 预览 */
+.preview-wrap {
+  display: flex;
+  align-items: center;
+  height: 76rpx;
+  padding: 0 28rpx;
+  background: #f7f8fa;
+  border-radius: 16rpx;
+  margin-bottom: 26rpx;
+}
+
+.preview-stroke {
+  width: 100%;
+  border-radius: 999rpx;
+  min-height: 2rpx;
+}
+
+/* 按钮 */
+.actions {
+  display: flex;
+}
+
+.actions.second {
+  margin-top: 18rpx;
+}
+
+.btn {
+  flex: 1;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  border-radius: 999rpx;
+  font-size: 30rpx;
+  color: #4b5058;
+  background: #f2f3f5;
+  margin-right: 20rpx;
+}
+
+.btn:last-child {
+  margin-right: 0;
+}
+
+.btn.primary {
+  background: linear-gradient(135deg, #07c160, #04a352);
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.btn.ghost {
+  background: #fff;
+  border: 2rpx solid #e2e4e8;
+  color: #6b7280;
+  height: 80rpx;
+  line-height: 76rpx;
+  font-size: 28rpx;
+}
+
+.btn-hover {
+  opacity: 0.8;
+}

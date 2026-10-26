@@ -1,0 +1,7 @@
+<view class="page">
+  <view class="illustration"><view class="document"><view class="document-top"></view><view class="document-line long"></view><view class="document-line"></view><view class="document-line short"></view><view class="document-check">✓</view></view></view>
+  <text class="title">{{title}}</text>
+  <text class="description">{{description}}</text>
+  <text class="status">功能正在开发中</text>
+  <button class="back" bindtap="onBack">返回首页</button>
+</view>

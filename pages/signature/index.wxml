@@ -1,0 +1,33 @@
+<view class="signature-page {{previewing ? 'preview-mode' : ''}}">
+  <view class="board {{settings.gridType === 'none' ? 'no-grid' : (settings.gridType === 'cross' ? 'cross-grid' : 'small-grid')}} {{previewing ? 'preview-board' : ''}}" style="{{boardStyle}}">
+    <canvas type="2d" id="signCanvas" class="sign-canvas" disable-scroll="{{true}}"
+      bindtouchstart="onTouchStart" bindtouchmove="onTouchMove" bindtouchend="onTouchEnd" bindtouchcancel="onTouchEnd" />
+    <view class="empty-hint" wx:if="{{isEmpty && !previewing}}">在此区域手写签名</view>
+  </view>
+  <view class="preview-close" wx:if="{{previewing}}" bindtap="closePreview">返回编辑</view>
+  <view class="toolbar" wx:if="{{!previewing}}">
+    <view class="back-action" bindtap="goBack"><text class="back-arrow">‹</text><text>返回</text></view>
+    <view class="tools">
+      <block wx:for="{{tools}}" wx:key="id">
+        <view wx:if="{{index === 4}}" class="tool-divider"></view>
+        <button wx:if="{{item.id === 'share'}}" class="tool share-tool" open-type="share">
+          <text class="tool-icon">{{item.icon}}</text><text class="tool-label">{{item.label}}</text>
+        </button>
+        <view wx:else class="tool {{item.id === 'use' ? 'use-tool' : ''}} {{(item.id === 'undo' && !canUndo) || (item.id === 'redo' && !canRedo) ? 'disabled' : ''}}" data-action="{{item.id}}" bindtap="onToolTap" bindlongpress="onToolLongPress">
+          <text class="tool-icon">{{item.icon}}</text><text class="tool-label">{{item.label}}</text>
+        </view>
+      </block>
+    </view>
+  </view>
+  <view class="preview-toolbar" wx:if="{{previewing}}"><text>签名效果预览（透明背景）</text><button open-type="share" class="preview-share">分享</button></view>
+  <view class="share-mask" wx:if="{{shareVisible}}" bindtap="closeSharePanel">
+    <view class="share-panel" catchtap="noop">
+      <view class="share-heading"><text>分享签名</text><text class="share-close" bindtap="closeSharePanel">×</text></view>
+      <view class="share-grid">
+        <view wx:for="{{shareItems}}" wx:key="id" class="share-item" data-action="{{item.id}}" bindtap="onShareAction">
+          <view class="share-logo logo-{{item.id}}">{{item.icon}}</view><text class="share-text">{{item.label}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,4 +1,6 @@
 <view class="page {{immersive ? 'immersive' : ''}}">
+<!-- 广告槽当前由配置关闭，不占用任何页面空间。 -->
+<ad-slot slot-id="signature" />
 
 <!-- 书写区 -->
 <view class="board">

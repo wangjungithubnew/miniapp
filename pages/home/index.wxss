@@ -1,0 +1,13 @@
+.page { height: 100vh; display: flex; flex-direction: column; background: #f5f8fc; overflow: hidden; }
+.notice { height: 64rpx; flex-shrink: 0; line-height: 64rpx; text-align: center; background: #2878e5; color: #fff; font-size: 24rpx; letter-spacing: 1rpx; }
+.brand { display: flex; align-items: center; padding: 32rpx 38rpx 22rpx; }
+.brand-mark { width: 88rpx; height: 88rpx; border-radius: 24rpx; background: linear-gradient(145deg,#3889f5,#1766d0); color: #fff; font-size: 48rpx; font-weight: 600; display: flex; align-items: center; justify-content: center; margin-right: 22rpx; box-shadow: 0 8rpx 20rpx rgba(40,120,229,.2); }
+.brand-title { display: block; font-size: 37rpx; color: #19212d; font-weight: 650; }
+.brand-subtitle { display: block; font-size: 25rpx; color: #8b96a5; margin-top: 8rpx; }
+.content { flex: 1; min-height: 0; }
+.content-end { height: 24rpx; }
+.footer { display: flex; gap: 22rpx; padding: 34rpx 30rpx 14rpx; margin-top: 10rpx; }
+.footer-btn { flex: 1; margin: 0; height: 96rpx; line-height: 96rpx; border-radius: 22rpx; font-size: 31rpx; font-weight: 600; }
+.footer-btn::after { border: 0; }
+.contact { color: #2878e5; background: #edf5ff; }
+.share { color: #fff; background: #2878e5; }

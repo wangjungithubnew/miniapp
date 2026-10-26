@@ -1,0 +1,6 @@
+.card { position: relative; height: 216rpx; background: #fff; border-radius: 22rpx; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 5rpx 18rpx rgba(20, 54, 94, .045); }
+.card-hover { background: #f9fbff; transform: scale(.98); }
+.icon-box { width: 94rpx; height: 94rpx; display: flex; align-items: center; justify-content: center; color: #2878e5; margin-bottom: 14rpx; }
+.icon { width: 78rpx; height: 78rpx; }
+.title { color: #20242b; font-size: 30rpx; font-weight: 600; }
+.hot-badge { position: absolute; left: 0; top: 0; padding: 7rpx 15rpx 8rpx 12rpx; border-radius: 18rpx 0 14rpx 0; background: linear-gradient(135deg,#ff714f,#f13c43); color: #fff; font-size: 20rpx; line-height: 1.2; font-weight: 600; box-shadow: 0 3rpx 8rpx rgba(241,60,67,.2); }

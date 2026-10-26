@@ -1,0 +1,36 @@
+page { background: #f5f7fa; }
+.settings-page { padding: 30rpx; }
+.section-title { margin: 28rpx 0 20rpx; color: #293648; font-size: 29rpx; font-weight: 600; }
+.options { display: flex; gap: 18rpx; }
+.option { flex: 1; height: 170rpx; border: 2rpx solid #e4e9f0; border-radius: 18rpx; background: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12rpx; color: #657286; font-size: 24rpx; }
+.option.selected { border-color: #2878e5; color: #2878e5; background: #f4f9ff; }
+.grid-preview { width: 72rpx; height: 72rpx; background: #fff; border: 1rpx solid #e4e9f0; }
+.small-preview { background-image: linear-gradient(#9ebde2 1rpx,transparent 1rpx),linear-gradient(90deg,#9ebde2 1rpx,transparent 1rpx); background-size: 25% 25%; }
+.cross-preview { background-image: linear-gradient(#9ebde2 1rpx,transparent 1rpx),linear-gradient(90deg,#9ebde2 1rpx,transparent 1rpx),linear-gradient(45deg,transparent 49%,#9ebde2 50%,transparent 51%),linear-gradient(-45deg,transparent 49%,#9ebde2 50%,transparent 51%); background-size: 25% 25%,25% 25%,100% 100%,100% 100%; }
+.color-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18rpx 12rpx; padding: 8rpx 0 18rpx; }
+.color-option { position: relative; min-height: 118rpx; border: 2rpx solid #e6eaf0; border-radius: 16rpx; background: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10rpx; box-sizing: border-box; }
+.color-option.chosen { border: 4rpx solid #2878e5; background: #f2f8ff; box-shadow: 0 4rpx 14rpx rgba(40,120,229,.16); }
+.swatch { width: 48rpx; height: 48rpx; border-radius: 50%; border: 2rpx solid rgba(40,55,75,.15); display: flex; align-items: center; justify-content: center; box-sizing: border-box; }
+.check { color: #fff; font-size: 32rpx; line-height: 1; text-shadow: 0 1rpx 4rpx rgba(0,0,0,.65); font-weight: 700; }
+.color-name { font-size: 21rpx; color: #5d6a7b; }
+.color-option.chosen .color-name { color: #176acb; font-weight: 600; }
+.picker-entry { height: 82rpx; margin: 4rpx 0 10rpx; padding: 0 20rpx; border-radius: 16rpx; background: #fff; display: flex; align-items: center; gap: 14rpx; color: #405066; font-size: 24rpx; }
+.picker-current { width: 40rpx; height: 40rpx; border-radius: 50%; border: 2rpx solid rgba(35,48,65,.2); }
+.picker-value { margin-left: auto; color: #8a95a4; font-size: 22rpx; }
+.picker-arrow { margin-left: 10rpx; color: #97a1af; font-size: 38rpx; }
+.picker-mask { position: fixed; z-index: 10; inset: 0; background: rgba(20,30,44,.4); display: flex; align-items: flex-end; }
+.picker-panel { width: 100%; box-sizing: border-box; padding: 28rpx 30rpx calc(34rpx + env(safe-area-inset-bottom)); background: #fff; border-radius: 28rpx 28rpx 0 0; }
+.picker-head { display: flex; align-items: center; justify-content: space-between; color: #263448; font-size: 30rpx; font-weight: 600; margin-bottom: 24rpx; }
+.picker-done { color: #2878e5; font-size: 26rpx; font-weight: 500; }
+.shade-picker { position: relative; width: 100%; height: 330rpx; overflow: hidden; border-radius: 12rpx; background-color: #f00; }
+.shade-white,.shade-black { position: absolute; inset: 0; }
+.shade-white { background: linear-gradient(90deg,#fff,rgba(255,255,255,0)); }
+.shade-black { background: linear-gradient(0deg,#000,rgba(0,0,0,0)); }
+.shade-thumb { position: absolute; width: 30rpx; height: 30rpx; border: 4rpx solid #fff; border-radius: 50%; box-shadow: 0 1rpx 7rpx rgba(0,0,0,.55); transform: translate(-50%,-50%); }
+.hue-row { display: flex; align-items: center; gap: 20rpx; margin-top: 26rpx; color: #6c7889; font-size: 23rpx; }
+.hue-row slider { flex: 1; margin: 0; }
+.picker-preview-row { display: flex; align-items: center; gap: 16rpx; margin-top: 16rpx; color: #586679; font-size: 24rpx; }
+.picker-preview { width: 58rpx; height: 58rpx; border: 2rpx solid rgba(35,48,65,.18); border-radius: 14rpx; }
+.value { float: right; color: #2878e5; font-weight: 400; }
+.setting-row { margin-top: 38rpx; padding: 25rpx 24rpx; background: #fff; border-radius: 18rpx; display: flex; align-items: center; justify-content: space-between; }
+.row-title,.row-desc { display: block; }.row-title { font-size: 27rpx; color: #293648; }.row-desc { margin-top: 8rpx; color: #929cab; font-size: 22rpx; }

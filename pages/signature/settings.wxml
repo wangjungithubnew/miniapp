@@ -1,0 +1,36 @@
+<view class="settings-page">
+  <view class="section-title">画布底纹</view>
+  <view class="options">
+    <view class="option {{settings.gridType === 'small' ? 'selected' : ''}}" data-value="small" bindtap="selectGrid"><view class="grid-preview small-preview"></view><text>小字格</text></view>
+    <view class="option {{settings.gridType === 'cross' ? 'selected' : ''}}" data-value="cross" bindtap="selectGrid"><view class="grid-preview cross-preview"></view><text>米字格</text></view>
+    <view class="option {{settings.gridType === 'none' ? 'selected' : ''}}" data-value="none" bindtap="selectGrid"><view class="grid-preview"></view><text>无底纹</text></view>
+  </view>
+  <view class="section-title">画布底色</view>
+  <view class="picker-entry" data-target="backgroundColor" bindtap="showPicker"><view class="picker-current" style="background:{{settings.backgroundColor}}"></view><text>自选底色</text><text class="picker-value">{{settings.backgroundColor}}</text><text class="picker-arrow">›</text></view>
+  <view class="color-grid">
+    <view wx:for="{{backgrounds}}" wx:key="value" class="color-option {{settings.backgroundColor === item.value ? 'chosen' : ''}}" data-value="{{item.value}}" bindtap="selectBackground">
+      <view class="swatch" style="background:{{item.value}}"><text wx:if="{{settings.backgroundColor === item.value}}" class="check">✓</text></view><text class="color-name">{{item.name}}</text>
+    </view>
+  </view>
+  <view class="section-title">字体颜色</view>
+  <view class="picker-entry" data-target="color" bindtap="showPicker"><view class="picker-current" style="background:{{settings.color}}"></view><text>自选字色</text><text class="picker-value">{{settings.color}}</text><text class="picker-arrow">›</text></view>
+  <view class="color-grid">
+    <view wx:for="{{colors}}" wx:key="value" class="color-option {{settings.color === item.value ? 'chosen' : ''}}" data-value="{{item.value}}" bindtap="selectColor">
+      <view class="swatch" style="background:{{item.value}}"><text wx:if="{{settings.color === item.value}}" class="check">✓</text></view><text class="color-name">{{item.name}}</text>
+    </view>
+  </view>
+  <view class="section-title">笔迹粗细 <text class="value">{{settings.lineWidth}}</text></view>
+  <slider min="2" max="14" step="1" value="{{settings.lineWidth}}" activeColor="#2878e5" bindchange="onWidthChange" />
+  <view class="setting-row"><view><text class="row-title">模拟压力笔锋</text><text class="row-desc">根据书写速度调整笔迹粗细</text></view><switch checked="{{settings.pressure}}" color="#2878e5" bindchange="onPressureChange" /></view>
+  <view class="picker-mask" wx:if="{{pickerTarget}}" bindtap="hidePicker">
+    <view class="picker-panel" catchtap="noop">
+      <view class="picker-head"><text>自选{{pickerTarget === 'color' ? '字体颜色' : '画布底色'}}</text><text class="picker-done" bindtap="confirmPicker">完成</text></view>
+      <view id="shadePicker" class="shade-picker" style="{{shadeStyle}}" bindtouchstart="onShadeTouch" bindtouchmove="onShadeTouch">
+        <view class="shade-white"></view><view class="shade-black"></view>
+        <view class="shade-thumb" style="left:{{saturation}}%;top:{{100-brightness}}%"></view>
+      </view>
+      <view class="hue-row"><text>色相</text><slider min="0" max="359" value="{{hue}}" activeColor="#2878e5" backgroundColor="#e5eaf1" bindchange="onHueChange" /></view>
+      <view class="picker-preview-row"><view class="picker-preview" style="background:{{selectedHex}}"></view><text>{{selectedHex}}</text></view>
+    </view>
+  </view>
+</view>

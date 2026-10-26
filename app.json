@@ -1,11 +1,15 @@
 {
   "pages": [
+    "pages/home/index",
+    "pages/signature/index",
+    "pages/signature/settings",
+    "pages/placeholder/index",
     "pages/index/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#ffffff",
-    "navigationBarTitleText": "电子签名",
+    "navigationBarTitleText": "电子签名 · 书法工具",
     "navigationBarTextStyle": "black",
     "backgroundColor": "#f5f6f8"
   },

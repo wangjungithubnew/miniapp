@@ -1,0 +1,1 @@
+<ad wx:if="{{enabled}}" unit-id="{{unitId}}" ad-type="banner" />

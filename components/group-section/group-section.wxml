@@ -1,0 +1,6 @@
+<view class="group">
+  <view class="group-heading"><text class="group-title">{{group.title}}</text><view class="heading-line"></view></view>
+  <view class="grid">
+    <feature-card wx:for="{{group.features}}" wx:key="id" feature="{{item}}" bind:select="onSelect" />
+  </view>
+</view>

@@ -1,6 +1,4 @@
 <view class="page">
-  <view class="notice">永久免费，建议添加到我的小程序</view>
-  <view class="brand"><view class="brand-mark">签</view><view><text class="brand-title">电子签名 + 书法工具</text><text class="brand-subtitle">轻松创作，让每一笔都有温度</text></view></view>
   <scroll-view class="content" scroll-y="true" enhanced="true" show-scrollbar="false">
     <group-section wx:for="{{groups}}" wx:key="id" group="{{item}}" bind:select="onFeatureSelect" />
     <view class="footer">

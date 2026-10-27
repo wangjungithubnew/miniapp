@@ -2,6 +2,7 @@
   "pages": [
     "pages/home/index",
     "pages/signature/index",
+    "pages/file-sign/index",
     "pages/signature/settings",
     "pages/placeholder/index",
     "pages/index/index"

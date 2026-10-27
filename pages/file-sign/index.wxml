@@ -1,0 +1,40 @@
+<view class="file-page">
+  <view class="workspace">
+    <view wx:if="{{!filePath}}" class="empty-state">
+      <view class="empty-icon">▤</view><text class="empty-title">选择需要签名的文件</text><text class="empty-desc">支持 PDF、JPG、PNG 图片</text>
+      <button class="empty-select" bindtap="openFilePicker">选择文件</button>
+    </view>
+    <view wx:elif="{{fileType === 'pdf'}}" class="pdf-state">
+      <view class="pdf-icon">PDF</view><text class="file-name">{{fileName}}</text><text class="pdf-tip">PDF 页面已载入</text>
+      <button class="open-pdf" bindtap="openPdf">打开 PDF 预览</button>
+      <view wx:if="{{signaturePath}}" class="pdf-signature" style="left:{{signX}}px;top:{{signY}}px;width:{{signWidth}}px" bindtouchstart="onSignTouchStart" bindtouchmove="onSignTouchMove"><image src="{{signaturePath}}" mode="widthFix" /></view>
+    </view>
+    <view wx:else class="image-stage" id="imageStage" bindtouchmove="onSignTouchMove">
+      <image class="document-image" src="{{filePath}}" mode="aspectFit" />
+      <view wx:if="{{signaturePath}}" class="signature-layer" style="left:{{signX}}px;top:{{signY}}px;width:{{signWidth}}px" bindtouchstart="onSignTouchStart" bindtouchmove="onSignTouchMove">
+        <image class="signature-image" src="{{signaturePath}}" mode="aspectFit" />
+        <view class="resize-handle" catchtouchstart="onResizeStart" catchtouchmove="onResizeMove">↘</view>
+      </view>
+    </view>
+    <view wx:if="{{filePath}}" class="file-topline"><text class="file-name-small">{{fileName}}</text><text class="replace-file" bindtap="openFilePicker">更换</text></view>
+    <canvas type="2d" id="exportCanvas" class="export-canvas" />
+  </view>
+  <view class="bottom-actions">
+    <view class="action-row">
+      <button class="action-btn choose-file" bindtap="openFilePicker"><text class="action-icon">{{actions[0].icon}}</text>{{actions[0].label}}</button>
+      <button class="action-btn choose-sign" bindtap="openSignaturePicker"><text class="action-icon">{{actions[1].icon}}</text>{{actions[1].label}}</button>
+    </view>
+    <button class="download-btn {{canExport ? '' : 'disabled'}}" bindtap="downloadFile">{{actions[2].label}}</button>
+    <text class="hint">{{canExport ? '拖动签名调整位置，拖右下角调整大小' : '请选择文件和签名后下载'}}</text>
+  </view>
+  <view wx:if="{{filePickerVisible}}" class="mask" bindtap="closeFilePicker"><view class="sheet" catchtap="noop"><view class="sheet-head">选择文件 <text bindtap="closeFilePicker">×</text></view>
+    <view class="source-option" bindtap="chooseFile"><view class="source-icon">▤</view><view><text class="source-title">聊天文件 / 本地文件</text><text class="source-desc">选择 PDF 或图片文件</text></view><text class="chevron">›</text></view>
+    <view class="source-option" bindtap="chooseFromAlbum"><view class="source-icon">▧</view><view><text class="source-title">相册图片</text><text class="source-desc">从微信相册选择图片</text></view><text class="chevron">›</text></view>
+  </view></view>
+  <view wx:if="{{signaturePickerVisible}}" class="mask" bindtap="closeSignaturePicker">
+    <view class="sheet" catchtap="noop"><view class="sheet-head">选择签名 <text bindtap="closeSignaturePicker">×</text></view>
+      <view class="source-option" bindtap="chooseSavedSignature"><view class="source-icon">▧</view><view><text class="source-title">{{signatureSources[0].label}}</text><text class="source-desc">选择相册或文件中的签名 PNG</text></view><text class="chevron">›</text></view>
+      <view class="source-option" bindtap="createSignature"><view class="source-icon">✍</view><view><text class="source-title">{{signatureSources[1].label}}</text><text class="source-desc">跳转手写签名并自动回传</text></view><text class="chevron">›</text></view>
+    </view>
+  </view>
+</view>

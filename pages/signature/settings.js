@@ -33,7 +33,7 @@ Page({
     ],
     colors: [
       { name: '黑色', value: '#17202c' }, { name: '深灰', value: '#555b64' },
-      { name: '蓝色', value: '#2878e5' }, { name: '红色', value: '#d94141' },
+      { name: '蓝色', value: '#D95778' }, { name: '红色', value: '#d94141' },
       { name: '金色', value: '#ba8b22' }, { name: '绿色', value: '#15966a' },
       { name: '紫色', value: '#7a50b5' }, { name: '白色', value: '#ffffff' }
     ]

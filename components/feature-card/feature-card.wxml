@@ -1,7 +1,7 @@
-<view class="card" hover-class="card-hover" bindtap="onTap">
-  <view wx:if="{{feature.isHot}}" class="hot-badge">最火</view>
+<view class="card tone-{{tone}}" hover-class="card-hover" bindtap="onTap">
   <view class="icon-box">
-    <image class="icon" src="{{feature.iconPath}}" mode="aspectFit" />
+    <image class="icon" src="{{displayIconPath}}" mode="aspectFit" />
   </view>
   <text class="title">{{feature.title}}</text>
+  <text wx:if="{{feature.description}}" class="description">{{feature.description}}</text>
 </view>

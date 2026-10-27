@@ -1,0 +1,24 @@
+page { height: 100%; background: #F5F7FA; }
+.file-page { height: 100vh; display: flex; flex-direction: column; background: #F5F7FA; overflow: hidden; }
+.workspace { position: relative; flex: 1; min-height: 0; margin: 20rpx 22rpx 10rpx; overflow: hidden; border-radius: 16rpx; background-color: #FFFFFF; background-image: linear-gradient(45deg,rgba(31,35,41,.035) 25%,transparent 25%,transparent 75%,rgba(31,35,41,.035) 75%),linear-gradient(45deg,rgba(31,35,41,.035) 25%,transparent 25%,transparent 75%,rgba(31,35,41,.035) 75%); background-position: 0 0,12rpx 12rpx; background-size: 24rpx 24rpx; box-shadow: 0 1px 2px rgba(31,35,41,.04); }
+.empty-state { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.empty-icon { font-size: 105rpx; line-height: 1.2; color: #E4A1B1; }
+.empty-title { margin-top: 24rpx; font-size: 31rpx; color: #1F2329; }.empty-desc { margin-top: 12rpx; color: #8A9099; font-size: 24rpx; }
+.empty-select,.open-pdf { margin-top: 30rpx; height: 76rpx; line-height: 76rpx; padding: 0 38rpx; border-radius: 12rpx; color: #fff; background: #D95778; font-size: 26rpx; }.empty-select::after,.open-pdf::after { border: 0; }
+.image-stage { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.document-image { width: 100%; height: 100%; }
+.signature-layer,.pdf-signature { position: absolute; z-index: 3; min-width: 80rpx; min-height: 44rpx; border: 2rpx dashed rgba(40,120,229,.65); box-sizing: border-box; touch-action: none; }
+.signature-image { display: block; width: 100%; height: auto; pointer-events: none; }
+.resize-handle { position: absolute; right: -15rpx; bottom: -15rpx; width: 36rpx; height: 36rpx; border-radius: 50%; background: #D95778; color: #fff; text-align: center; line-height: 36rpx; font-size: 22rpx; }
+.file-topline { position: absolute; z-index: 4; left: 18rpx; right: 18rpx; top: 18rpx; padding: 14rpx 18rpx; border-radius: 14rpx; display: flex; justify-content: space-between; background: rgba(255,255,255,.9); color: #425066; font-size: 22rpx; }
+.file-name-small { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; max-width: 78%; }.replace-file { color: #D95778; }
+.pdf-state { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; }
+.pdf-icon { width: 150rpx; height: 180rpx; display: flex; align-items: center; justify-content: center; background: #fff; border: 2rpx solid #e7a2a2; border-radius: 12rpx; color: #c95858; font-weight: 400; font-size: 32rpx; box-shadow: 0 1px 2px rgba(31,35,41,.04); }
+.file-name { margin-top: 25rpx; color: #344256; font-size: 27rpx; }.pdf-tip { margin-top: 12rpx; color: #8e9aab; font-size: 22rpx; }
+.pdf-signature image { width: 100%; }.export-canvas { position: fixed; left: -2000px; top: -2000px; width: 1px; height: 1px; }
+.bottom-actions { flex-shrink: 0; padding: 15rpx 28rpx calc(18rpx + env(safe-area-inset-bottom)); background: #FFFFFF; box-shadow: 0 -1px 2px rgba(31,35,41,.04); }
+.action-row { display: flex; gap: 18rpx; }.action-btn { flex: 1; height: 78rpx; line-height: 78rpx; margin: 0; border-radius: 12rpx; color: #D95778; background: #FFF1F4; font-size: 26rpx; }.action-btn::after { border: 0; }.choose-sign { background: #EAF8F0; color: #16835E; }.action-icon { margin-right: 10rpx; font-size: 30rpx; }
+.download-btn { margin: 16rpx 0 0; height: 86rpx; line-height: 86rpx; border-radius: 12rpx; color: #fff; background: #D95778; font-size: 29rpx; font-weight: 400; }.download-btn.disabled { background: #C6CCD5; }.download-btn::after { border: 0; }
+.hint { display: block; margin-top: 12rpx; color: #929eac; text-align: center; font-size: 21rpx; }
+.mask { position: fixed; z-index: 10; inset: 0; display: flex; align-items: flex-end; background: rgba(16,27,42,.42); }.sheet { width: 100%; padding: 28rpx 28rpx calc(28rpx + env(safe-area-inset-bottom)); box-sizing: border-box; border-radius: 16rpx 16rpx 0 0; background: #fff; }.sheet-head { display: flex; justify-content: space-between; margin-bottom: 18rpx; font-size: 31rpx; font-weight: 400; color: #1F2329; }.sheet-head text { font-size: 42rpx; color: #8A9099; font-weight: 300; }
+.source-option { min-height: 112rpx; display: flex; align-items: center; gap: 20rpx; border-bottom: 1rpx solid #eef0f3; }.source-icon { width: 70rpx; height: 70rpx; display: flex; align-items: center; justify-content: center; border-radius: 18rpx; background: #FFF1F4; color: #D95778; font-size: 35rpx; }.source-title,.source-desc { display: block; }.source-title { color: #35445a; font-size: 26rpx; }.source-desc { margin-top: 7rpx; color: #929eac; font-size: 21rpx; }.chevron { margin-left: auto; color: #a1aab6; font-size: 40rpx; }

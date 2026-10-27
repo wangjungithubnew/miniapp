@@ -1,5 +1,5 @@
-.group { margin: 36rpx 26rpx 0; }
+.group { margin: 28rpx 28rpx 0; }
 .group-heading { display: flex; align-items: center; margin-bottom: 22rpx; }
-.group-title { color: #20242b; font-size: 39rpx; font-weight: 500; }
-.heading-line { width: 9rpx; height: 36rpx; background: #2878e5; border-radius: 8rpx; margin-right: 16rpx; order: -1; }
-.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28rpx 18rpx; }
+.group-title { color: #1F2329; font-size: 34rpx; font-weight: 500; }
+.heading-line { width: 4rpx; height: 30rpx; background: #D95778; border-radius: 3rpx; margin-right: 16rpx; order: -1; }
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16rpx; }

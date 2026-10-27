@@ -1,12 +1,12 @@
-.page { min-height: 100vh; box-sizing: border-box; padding: 100rpx 54rpx; background: #f5f8fc; display: flex; align-items: center; flex-direction: column; }
+.page { min-height: 100vh; box-sizing: border-box; padding: 100rpx 54rpx; background: #F5F7FA; display: flex; align-items: center; flex-direction: column; }
 .illustration { width: 260rpx; height: 240rpx; display: flex; justify-content: center; align-items: center; margin-bottom: 40rpx; }
-.document { position: relative; width: 150rpx; height: 190rpx; border-radius: 20rpx; background: #fff; box-shadow: 0 12rpx 36rpx rgba(36,99,168,.12); padding: 32rpx 24rpx; box-sizing: border-box; }
+.document { position: relative; width: 150rpx; height: 190rpx; border-radius: 14rpx; background: #fff; box-shadow: 0 1px 2px rgba(31,35,41,.04); padding: 32rpx 24rpx; box-sizing: border-box; }
 .document-top { width: 46rpx; height: 10rpx; border-radius: 5rpx; background: #dceaff; margin-bottom: 24rpx; }
 .document-line { width: 84rpx; height: 8rpx; border-radius: 5rpx; background: #e8eef6; margin-bottom: 14rpx; }
 .document-line.long { width: 100rpx; }.document-line.short { width: 60rpx; }
-.document-check { position: absolute; right: -32rpx; bottom: 14rpx; width: 74rpx; height: 74rpx; border-radius: 50%; background: #2878e5; color: #fff; font-size: 48rpx; text-align: center; line-height: 74rpx; border: 8rpx solid #f5f8fc; }
-.title { font-size: 38rpx; font-weight: 600; color: #202a37; margin-bottom: 18rpx; }
-.description { font-size: 27rpx; color: #7d8998; text-align: center; line-height: 1.7; }
-.status { margin-top: 34rpx; padding: 12rpx 24rpx; background: #eaf3ff; color: #2878e5; border-radius: 30rpx; font-size: 23rpx; }
-.back { margin-top: 70rpx; width: 100%; height: 88rpx; border-radius: 18rpx; color: #fff; background: #2878e5; font-size: 29rpx; line-height: 88rpx; }
+.document-check { position: absolute; right: -32rpx; bottom: 14rpx; width: 74rpx; height: 74rpx; border-radius: 50%; background: #D95778; color: #fff; font-size: 48rpx; text-align: center; line-height: 74rpx; border: 8rpx solid #f5f8fc; }
+.title { font-size: 38rpx; font-weight: 400; color: #1F2329; margin-bottom: 18rpx; }
+.description { font-size: 27rpx; color: #8A9099; text-align: center; line-height: 1.7; }
+.status { margin-top: 34rpx; padding: 12rpx 24rpx; background: #eaf3ff; color: #D95778; border-radius: 30rpx; font-size: 23rpx; }
+.back { margin-top: 70rpx; width: 100%; height: 88rpx; border-radius: 12rpx; color: #fff; background: #D95778; font-size: 29rpx; line-height: 88rpx; }
 .back::after { border: 0; }

@@ -9,7 +9,7 @@ Page({
     fileTypes: config.fileTypes,
     signatureSources: config.signatureSources,
     filePath: '', fileName: '', fileType: '', signaturePath: '', canExport: false,
-    signaturePickerVisible: false, filePickerVisible: false, signX: 70, signY: 220, signWidth: 190
+    signaturePickerVisible: false, filePickerVisible: false, signX: 70, signY: 220, signWidth: 190, signHeight: 74, signatureReady: false, fileSheetItems: config.fileSources, signatureSheetItems: config.signatureSources
   },
   onLoad() {
     this.signatureRect = { x: 70, y: 220, width: 190 }
@@ -19,6 +19,10 @@ Page({
     this.signatureChannelHandler = payload => {
       if (payload && payload.tempFilePath) this.setSignature(payload.tempFilePath)
     }
+  },
+  onShow() {
+    const cached = wx.getStorageSync('lastSignaturePath')
+    if (cached && cached !== this.data.signaturePath) this.setSignature(cached)
   },
   onReady() {
     wx.createSelectorQuery().select('#exportCanvas').fields({ node: true }).exec(res => {
@@ -34,9 +38,27 @@ Page({
   },
   openFilePicker() { this.setData({ filePickerVisible: true }) },
   closeFilePicker() { this.setData({ filePickerVisible: false }) },
+  onFileSourceTap(e) {
+    const id = e.currentTarget.dataset.id
+    if (id === 'cancel') return this.closeFilePicker()
+    if (id === 'camera') return this.chooseCamera()
+    if (id === 'pdf') return this.choosePdf()
+    return this.chooseFile()
+  },
   chooseFile() {
     this.closeFilePicker()
     wx.chooseMessageFile({ count: 1, type: 'all', extension: config.fileTypes.reduce((all, type) => all.concat(type.extensions), []), success: res => this.useSelectedFile(res.tempFiles[0]) })
+  },
+  choosePdf() {
+    this.closeFilePicker()
+    wx.chooseMessageFile({ count: 1, type: 'file', extension: ['pdf'], success: res => this.useSelectedFile(res.tempFiles[0]) })
+  },
+  chooseCamera() {
+    this.closeFilePicker()
+    wx.chooseMedia({ count: 1, mediaType: ['image'], sourceType: ['camera'], success: res => {
+      const f = res.tempFiles[0]
+      this.useSelectedFile({ path: f.tempFilePath, name: `拍摄文件.${fileSignService.getFileType(f.tempFilePath) || 'jpg'}` })
+    } })
   },
   useSelectedFile(file) {
     if (!file || !file.path) return
@@ -70,6 +92,13 @@ Page({
   openSignaturePicker() { this.setData({ signaturePickerVisible: true }) },
   closeSignaturePicker() { this.setData({ signaturePickerVisible: false }) },
   noop() {},
+  onSignatureSourceTap(e) {
+    const id = e.currentTarget.dataset.id
+    if (id === 'cancel') return this.closeSignaturePicker()
+    if (id === 'hand') return this.createSignature()
+    if (id === 'seal') return this.chooseSavedSignature()
+    if (id === 'date') return this.createDateSignature()
+  },
   chooseSavedSignature() {
     this.closeSignaturePicker()
     wx.chooseMedia({ count: 1, mediaType: ['image'], sourceType: ['album'], success: res => this.setSignature(res.tempFiles[0].tempFilePath) })
@@ -78,10 +107,25 @@ Page({
     this.closeSignaturePicker()
     wx.navigateTo({ url: '/pages/signature/index', events: { signatureCreated: this.signatureChannelHandler } })
   },
+  createDateSignature() {
+    this.closeSignaturePicker()
+    wx.showToast({ title: '年月日签名即将开放', icon: 'none' })
+  },
   setSignature(path) {
-    this.signatureRect = Object.assign({}, this.signatureRect, { width: 190 })
-    this.setData({ signaturePath: path, signWidth: this.signatureRect.width })
-    this.updateCanExport({ signaturePath: path })
+    if (!path) return
+    wx.getImageInfo({ src: path, success: info => {
+      const width = 190
+      const height = Math.max(44, Math.round(width * (info.height / Math.max(1, info.width))))
+      this.signatureRect = Object.assign({}, this.signatureRect, { width, height })
+      this.setData({ signaturePath: path, signatureReady: true, signWidth: width, signHeight: height, signX: this.signatureRect.x, signY: this.signatureRect.y })
+      this.updateCanExport({ signaturePath: path })
+    }, fail: () => {
+      wx.showToast({ title: '签名图片暂时无法读取', icon: 'none' })
+    } })
+  },
+  onSignatureError() {
+    this.setData({ signatureReady: false })
+    wx.showToast({ title: '签名图层加载失败，请重新选择', icon: 'none' })
   },
   onSignTouchStart(e) {
     const touch = e.touches[0]
@@ -124,7 +168,7 @@ Page({
       const fit = Math.min(stage.width / size.width, stage.height / size.height)
       const viewW = size.width * fit, viewH = size.height * fit
       const imageLeft = (stage.width - viewW) / 2, imageTop = (stage.height - viewH) / 2
-      const rect = { x: Math.max(0, this.signatureRect.x - imageLeft), y: Math.max(0, this.signatureRect.y - imageTop), width: this.signatureRect.width, height: this.signatureRect.width * .38 }
+      const rect = { x: Math.max(0, this.signatureRect.x - imageLeft), y: Math.max(0, this.signatureRect.y - imageTop), width: this.signatureRect.width, height: this.signatureRect.height || this.signatureRect.width * .38 }
       const output = await fileSignService.composeImage({ canvas: this.exportCanvas, filePath: this.data.filePath, signaturePath: this.data.signaturePath, signatureRect: rect, width: stage.width, height: stage.height })
       await signatureService.saveToAlbum(output)
       wx.hideLoading()

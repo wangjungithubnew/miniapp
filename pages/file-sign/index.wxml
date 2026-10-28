@@ -7,12 +7,12 @@
     <view wx:elif="{{fileType === 'pdf'}}" class="pdf-state">
       <view class="pdf-icon">PDF</view><text class="file-name">{{fileName}}</text><text class="pdf-tip">PDF 页面已载入</text>
       <button class="open-pdf" bindtap="openPdf">打开 PDF 预览</button>
-      <view wx:if="{{signaturePath}}" class="pdf-signature" style="left:{{signX}}px;top:{{signY}}px;width:{{signWidth}}px" bindtouchstart="onSignTouchStart" bindtouchmove="onSignTouchMove"><image src="{{signaturePath}}" mode="widthFix" /></view>
+      <view wx:if="{{signatureReady}}" class="pdf-signature" style="left:{{signX}}px;top:{{signY}}px;width:{{signWidth}}px;height:{{signHeight}}px" bindtouchstart="onSignTouchStart" bindtouchmove="onSignTouchMove"><image class="signature-image" src="{{signaturePath}}" mode="aspectFit" binderror="onSignatureError" /></view>
     </view>
     <view wx:else class="image-stage" id="imageStage" bindtouchmove="onSignTouchMove">
       <image class="document-image" src="{{filePath}}" mode="aspectFit" />
-      <view wx:if="{{signaturePath}}" class="signature-layer" style="left:{{signX}}px;top:{{signY}}px;width:{{signWidth}}px" bindtouchstart="onSignTouchStart" bindtouchmove="onSignTouchMove">
-        <image class="signature-image" src="{{signaturePath}}" mode="aspectFit" />
+      <view wx:if="{{signatureReady}}" class="signature-layer" style="left:{{signX}}px;top:{{signY}}px;width:{{signWidth}}px;height:{{signHeight}}px" bindtouchstart="onSignTouchStart" bindtouchmove="onSignTouchMove">
+        <image class="signature-image" src="{{signaturePath}}" mode="aspectFit" binderror="onSignatureError" />
         <view class="resize-handle" catchtouchstart="onResizeStart" catchtouchmove="onResizeMove">↘</view>
       </view>
     </view>
@@ -28,13 +28,11 @@
     <text class="hint">{{canExport ? '拖动签名调整位置，拖右下角调整大小' : '请选择文件和签名后下载'}}</text>
   </view>
   <view wx:if="{{filePickerVisible}}" class="mask" bindtap="closeFilePicker"><view class="sheet" catchtap="noop"><view class="sheet-head">选择文件 <text bindtap="closeFilePicker">×</text></view>
-    <view class="source-option" bindtap="chooseFile"><view class="source-icon">▤</view><view><text class="source-title">聊天文件 / 本地文件</text><text class="source-desc">选择 PDF 或图片文件</text></view><text class="chevron">›</text></view>
-    <view class="source-option" bindtap="chooseFromAlbum"><view class="source-icon">▧</view><view><text class="source-title">相册图片</text><text class="source-desc">从微信相册选择图片</text></view><text class="chevron">›</text></view>
+    <view wx:for="{{fileSheetItems}}" wx:key="id" class="source-option {{item.id === 'cancel' ? 'cancel-option' : ''}}" data-id="{{item.id}}" bindtap="onFileSourceTap"><view class="source-icon">{{item.icon}}</view><view><text class="source-title">{{item.label}}</text><text wx:if="{{item.desc}}" class="source-desc">{{item.desc}}</text></view><text wx:if="{{item.id !== 'cancel'}}" class="chevron">›</text></view>
   </view></view>
   <view wx:if="{{signaturePickerVisible}}" class="mask" bindtap="closeSignaturePicker">
     <view class="sheet" catchtap="noop"><view class="sheet-head">选择签名 <text bindtap="closeSignaturePicker">×</text></view>
-      <view class="source-option" bindtap="chooseSavedSignature"><view class="source-icon">▧</view><view><text class="source-title">{{signatureSources[0].label}}</text><text class="source-desc">选择相册或文件中的签名 PNG</text></view><text class="chevron">›</text></view>
-      <view class="source-option" bindtap="createSignature"><view class="source-icon">✍</view><view><text class="source-title">{{signatureSources[1].label}}</text><text class="source-desc">跳转手写签名并自动回传</text></view><text class="chevron">›</text></view>
+      <view wx:for="{{signatureSheetItems}}" wx:key="id" class="source-option {{item.id === 'cancel' ? 'cancel-option' : ''}}" data-id="{{item.id}}" bindtap="onSignatureSourceTap"><view class="source-icon">{{item.icon}}</view><view><text class="source-title">{{item.label}}</text><text wx:if="{{item.desc}}" class="source-desc">{{item.desc}}</text></view><text wx:if="{{item.id !== 'cancel'}}" class="chevron">›</text></view>
     </view>
   </view>
 </view>

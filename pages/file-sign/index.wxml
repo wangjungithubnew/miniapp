@@ -5,14 +5,14 @@
       <button class="empty-select" bindtap="openFilePicker">选择文件</button>
     </view>
     <view wx:elif="{{fileType === 'pdf'}}" class="pdf-state">
-      <view class="pdf-icon">PDF</view><text class="file-name">{{fileName}}</text><text class="pdf-tip">PDF 页面已载入</text>
-      <button class="open-pdf" bindtap="openPdf">打开 PDF 预览</button>
-      <view wx:if="{{signatureReady}}" class="pdf-signature" style="left:{{signX}}px;top:{{signY}}px;width:{{signWidth}}px;height:{{signHeight}}px" bindtouchstart="onSignTouchStart" bindtouchmove="onSignTouchMove"><image class="signature-image" src="{{signaturePath}}" mode="aspectFit" binderror="onSignatureError" /></view>
+      <view class="pdf-icon">PDF</view><text class="file-name">{{fileName}}</text><text class="pdf-tip">已自动打开 PDF 查看器</text>
+      <text class="pdf-note">微信原生 PDF 查看器不支持在页面内叠加小程序签名图层</text>
     </view>
     <view wx:else class="image-stage" id="imageStage" bindtouchmove="onSignTouchMove">
       <image class="document-image" src="{{filePath}}" mode="aspectFit" />
       <view wx:if="{{signatureReady}}" class="signature-layer" style="left:{{signX}}px;top:{{signY}}px;width:{{signWidth}}px;height:{{signHeight}}px" bindtouchstart="onSignTouchStart" bindtouchmove="onSignTouchMove">
-        <image class="signature-image" src="{{signaturePath}}" mode="aspectFit" binderror="onSignatureError" />
+        <image wx:if="{{signaturePath}}" class="signature-image" src="{{signaturePath}}" mode="aspectFit" binderror="onSignatureError" />
+        <text wx:if="{{!signaturePath && textSignature}}" class="text-signature">{{textSignature}}</text>
         <view class="resize-handle" catchtouchstart="onResizeStart" catchtouchmove="onResizeMove">↘</view>
       </view>
     </view>
@@ -24,7 +24,8 @@
       <button class="action-btn choose-file" bindtap="openFilePicker"><text class="action-icon">{{actions[0].icon}}</text>{{actions[0].label}}</button>
       <button class="action-btn choose-sign" bindtap="openSignaturePicker"><text class="action-icon">{{actions[1].icon}}</text>{{actions[1].label}}</button>
     </view>
-    <button class="download-btn {{canExport ? '' : 'disabled'}}" bindtap="downloadFile">{{actions[2].label}}</button>
+    <button wx:if="{{!signedPdfReady}}" class="download-btn {{canExport ? '' : 'disabled'}}" bindtap="downloadFile">{{fileType === 'pdf' ? '生成签字 PDF' : actions[2].label}}</button>
+    <view wx:if="{{fileType === 'pdf' && signedPdfReady}}" class="pdf-result-actions"><text class="pdf-ready-label">签字 PDF 已生成</text><button class="pdf-preview-btn" bindtap="previewSignedPdf">预览签字 PDF</button><button class="pdf-save-btn" bindtap="saveSignedPdf">下载签字 PDF</button></view>
     <text class="hint">{{canExport ? '拖动签名调整位置，拖右下角调整大小' : '请选择文件和签名后下载'}}</text>
   </view>
   <view wx:if="{{filePickerVisible}}" class="mask" bindtap="closeFilePicker"><view class="sheet" catchtap="noop"><view class="sheet-head">选择文件 <text bindtap="closeFilePicker">×</text></view>
@@ -33,6 +34,13 @@
   <view wx:if="{{signaturePickerVisible}}" class="mask" bindtap="closeSignaturePicker">
     <view class="sheet" catchtap="noop"><view class="sheet-head">选择签名 <text bindtap="closeSignaturePicker">×</text></view>
       <view wx:for="{{signatureSheetItems}}" wx:key="id" class="source-option {{item.id === 'cancel' ? 'cancel-option' : ''}}" data-id="{{item.id}}" bindtap="onSignatureSourceTap"><view class="source-icon">{{item.icon}}</view><view><text class="source-title">{{item.label}}</text><text wx:if="{{item.desc}}" class="source-desc">{{item.desc}}</text></view><text wx:if="{{item.id !== 'cancel'}}" class="chevron">›</text></view>
+    </view>
+  </view>
+  <view wx:if="{{textSignatureVisible}}" class="mask text-mask" bindtap="closeTextSignature">
+    <view class="text-sheet" catchtap="noop">
+      <view class="sheet-head">添加文字 <text bindtap="closeTextSignature">×</text></view>
+      <input class="text-input" maxlength="24" focus="true" placeholder="请输入签名文字" value="{{textSignature}}" bindinput="onTextInput" />
+      <view class="text-actions"><button class="text-cancel" bindtap="closeTextSignature">取消</button><button class="text-confirm" bindtap="confirmTextSignature">确定</button></view>
     </view>
   </view>
 </view>

@@ -1,5 +1,6 @@
-function getFileType(path) {
-  const match = String(path || '').match(/\.([a-z0-9]+)(?:$|\?)/i)
+function getFileType(path, name, mime) {
+  const match = String(name || path || '').match(/\.([a-z0-9]+)(?:$|\?)/i)
+  if (!match && String(mime || '').includes('pdf')) return 'pdf'
   return match ? match[1].toLowerCase() : ''
 }
 
@@ -32,11 +33,17 @@ async function composeImage(options) {
 }
 
 async function exportPdf(options) {
-  // PDF 的页面合成需要服务端 PDF 渲染/回写能力。保留清晰接口供云函数或后端接入。
-  if (typeof options.processPdf !== 'function') {
-    throw new Error('PDF签名导出需要配置后端PDF处理服务')
+  // 小程序端不能直接改写 PDF，统一通过业务层注入的处理器完成合成。
+  if (typeof options.processPdf === 'function') return options.processPdf(options)
+  if (options && options.endpoint) {
+    return new Promise((resolve, reject) => wx.uploadFile({
+      url: options.endpoint, filePath: options.filePath, name: 'file',
+      formData: { signaturePath: options.signaturePath, x: options.signatureRect.x, y: options.signatureRect.y, width: options.signatureRect.width, height: options.signatureRect.height },
+      success: res => { try { const data = JSON.parse(res.data || '{}'); data.filePath ? resolve(data.filePath) : reject(new Error(data.message || 'PDF合成失败')) } catch (e) { reject(new Error('PDF合成服务返回数据无效')) } },
+      fail: reject
+    }))
   }
-  return options.processPdf(options)
+  throw new Error('当前项目尚未配置 PDF 合成服务，请先配置后端接口')
 }
 
 module.exports = { getFileType, composeImage, exportPdf }

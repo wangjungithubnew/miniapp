@@ -201,13 +201,20 @@ Page({
     const tempFilePath = await this.exportPng()
     this.using = false
     if (!tempFilePath) return
+    // canvas 导出的临时文件可能在页面切换后失效，先保存到小程序本地文件系统。
+    const stablePath = await this.persistSignature(tempFilePath)
     const pages = getCurrentPages()
     const current = pages[pages.length - 1]
     const channel = current && current.getOpenerEventChannel && current.getOpenerEventChannel()
-    if (channel && channel.emit) channel.emit('signatureCreated', { tempFilePath })
-    wx.setStorageSync('lastSignaturePath', tempFilePath)
+    if (channel && channel.emit) channel.emit('signatureCreated', { tempFilePath: stablePath })
+    wx.setStorageSync('lastSignaturePath', stablePath)
     if (pages.length > 1) wx.navigateBack()
     else wx.showToast({ title: '签名已生成', icon: 'success' })
+  },
+  persistSignature(path) {
+    return new Promise(resolve => {
+      wx.saveFile({ tempFilePath: path, success: res => resolve(res.savedFilePath || path), fail: () => resolve(path) })
+    })
   },
   exportPng() {
     if (!this.strokes.length) { wx.showToast({ title: '请先书写签名', icon: 'none' }); return Promise.resolve('') }

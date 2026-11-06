@@ -6,8 +6,13 @@ App({
       return
     }
 
+    const cloudEnv = 'waqm-20261014-d2gl3j2hxff719013'
+    if (!cloudEnv) {
+      console.warn('未配置云开发环境 ID，PDF 云端合成不可用')
+      return
+    }
     wx.cloud.init({
-      env: '你的环境ID',   // 替换成云开发控制台里的实际环境ID
+      env: cloudEnv,
       traceUser: true
     })
   }

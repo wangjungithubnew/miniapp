@@ -7,7 +7,7 @@ module.exports = [
     features: [
       { id: 'hand-sign', title: '手写签名', iconPath: '/assets/icons/pen.svg', route: '/pages/signature/index', implemented: true, isHot: true },
       { id: 'file-sign', title: '文件签名', iconPath: '/assets/icons/file.svg', description: '为文件添加电子签名', isHot: true, route: '/pages/file-sign/index', implemented: true },
-      { id: 'task-sign', title: '任务签名', iconPath: '/assets/icons/list.svg', description: '群接龙与任务签名', isHot: true },
+      { id: 'task-sign', title: '任务签名', iconPath: '/assets/icons/list.svg', description: '群接龙与任务签名', isHot: true, route: '/pages/task-sign/index', implemented: true },
       { id: 'design-sign', title: '设计签名', iconPath: '/assets/icons/spark.svg', description: '制作个性化签名' },
       { id: 'office-seal', title: '办公印章', iconPath: '/assets/icons/seal.svg', description: '制作常用办公印章' },
       { id: 'media-extract', title: '网媒提取', iconPath: '/assets/icons/link.svg', description: '前往相关小程序', external: true }

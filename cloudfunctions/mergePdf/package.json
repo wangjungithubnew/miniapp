@@ -1,0 +1,9 @@
+{
+  "name": "mergePdf",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "pdf-lib": "^1.17.1",
+    "wx-server-sdk": "~2.6.3"
+  }
+}

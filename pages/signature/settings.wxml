@@ -21,7 +21,7 @@
   </view>
   <view class="section-title">笔迹粗细 <text class="value">{{settings.lineWidth}}</text></view>
   <slider min="2" max="14" step="1" value="{{settings.lineWidth}}" activeColor="#D95778" bindchange="onWidthChange" />
-  <view class="setting-row"><view><text class="row-title">模拟压力笔锋</text><text class="row-desc">根据书写速度调整笔迹粗细</text></view><switch checked="{{settings.pressure}}" color="#D95778" bindchange="onPressureChange" /></view>
+  <view class="setting-row"><view><text class="row-title">模拟压力笔锋</text><text class="row-desc">根据书写速度调整笔迹粗细</text></view><switch checked="{{settings.pressure}}" color="#20B8AA" bindchange="onPressureChange" /></view>
   <view class="picker-mask" wx:if="{{pickerTarget}}" bindtap="hidePicker">
     <view class="picker-panel" catchtap="noop">
       <view class="picker-head"><text>自选{{pickerTarget === 'color' ? '字体颜色' : '画布底色'}}</text><text class="picker-done" bindtap="confirmPicker">完成</text></view>

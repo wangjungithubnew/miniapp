@@ -4,3 +4,21 @@ page {
   color: #1F2329;
   font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, 'PingFang SC', sans-serif;
 }
+
+/* 统一产品视觉：参考示例采用白色内容卡片、深灰文字和青绿色操作按钮。 */
+button {
+  border: 0;
+  border-radius: 8rpx;
+  background: #20b8aa;
+  color: #ffffff;
+  font-size: 28rpx;
+  text-align: center;
+}
+button::after { border: 0; }
+.primary, .create-btn, .sign-btn, .play, .text-confirm, .text-confirm, .pdf-save-btn { background: #20b8aa !important; color: #ffffff !important; }
+.secondary, .share-btn, .pdf-preview-btn { background: #f0f8f7 !important; color: #168f86 !important; }
+.hero { background: #20b8aa !important; }
+.task-card, .message-card, .panel, .sheet, .shared-card { background: #ffffff !important; }
+.task-title, .message-content, .hero-title { color: #263238; }
+.tool.use-tool, .tool.use-tool .tool-icon, .download-btn, .empty-select, .open-pdf, .choose-file, .choose-sign, .text-confirm, .create-btn, .message-actions button { background: #20B8AA !important; color: #FFFFFF !important; }
+.hero .hero-title, .hero .hero-desc { color: #FFFFFF !important; }

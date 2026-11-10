@@ -4,5 +4,5 @@
 .footer { display: flex; gap: 22rpx; padding: 34rpx 30rpx 14rpx; margin-top: 10rpx; }
 .footer-btn { flex: 1; margin: 0; height: 88rpx; line-height: normal; border-radius: 12rpx; font-size: 31rpx; font-weight: 400; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0; }
 .footer-btn::after { border: 0; }
-.contact { color: #8A9099; background: #FFFFFF; border: 1rpx solid #E3E7ED; }
-.share { color: #FFFFFF; background: #D95778; border: 1rpx solid #D95778; box-shadow: 0 6rpx 14rpx rgba(217,87,120,.18); }
+.contact { color: #FFFFFF; background: #20B8AA; border: 1rpx solid #20B8AA; box-shadow: 0 6rpx 14rpx rgba(32,184,170,.18); }
+.share { color: #FFFFFF; background: #20B8AA; border: 1rpx solid #20B8AA; box-shadow: 0 6rpx 14rpx rgba(32,184,170,.18); }

@@ -1,1 +1,1 @@
-<ad wx:if="{{enabled}}" unit-id="{{unitId}}" ad-type="banner" />
+<view wx:if="{{enabled}}" class="ad-slot"><ad unit-id="{{unitId}}" ad-type="banner" /></view>

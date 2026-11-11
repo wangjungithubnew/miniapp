@@ -1,4 +1,5 @@
 <view class="signature-page {{previewing ? 'preview-mode' : ''}}">
+  <ad-slot wx:if="{{!previewing}}" slot-id="signature" />
   <view class="board {{settings.gridType === 'none' ? 'no-grid' : (settings.gridType === 'cross' ? 'cross-grid' : 'small-grid')}} {{previewing ? 'preview-board' : ''}}" style="{{boardStyle}}">
     <canvas type="2d" id="signCanvas" class="sign-canvas" disable-scroll="{{true}}"
       bindtouchstart="onTouchStart" bindtouchmove="onTouchMove" bindtouchend="onTouchEnd" bindtouchcancel="onTouchEnd" />

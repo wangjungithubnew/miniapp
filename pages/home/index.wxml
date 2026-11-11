@@ -1,4 +1,5 @@
 <view class="page">
+  <ad-slot slot-id="home" />
   <scroll-view class="content" scroll-y="true" enhanced="true" show-scrollbar="false">
     <group-section wx:for="{{groups}}" wx:key="id" group="{{item}}" bind:select="onFeatureSelect" />
     <view class="footer">

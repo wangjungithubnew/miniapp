@@ -3,6 +3,7 @@ module.exports = {
   enabled: false,
   slots: {
     home: { enabled: false, unitId: '' },
+    signature: { enabled: false, unitId: '' },
     placeholder: { enabled: false, unitId: '' }
   }
 }

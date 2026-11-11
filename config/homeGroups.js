@@ -25,4 +25,11 @@ module.exports = [
       { id: 'timed-message', title: '定时消息', iconPath: '/assets/icons/clock.svg', description: '安排消息发送', route: '/pages/timed-message/index', implemented: true }
     ]
   }
+  ,{
+    id: 'support',
+    title: '支持作者',
+    features: [
+      { id: 'support-author', title: '支持作者', iconPath: '/assets/icons/heart.svg', description: '支持工具持续维护', route: '/pages/support/index', implemented: true }
+    ]
+  }
 ]

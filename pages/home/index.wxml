@@ -2,10 +2,6 @@
   <ad-slot slot-id="home" />
   <scroll-view class="content" scroll-y="true" enhanced="true" show-scrollbar="false">
     <group-section wx:for="{{groups}}" wx:key="id" group="{{item}}" bind:select="onFeatureSelect" />
-    <view class="footer">
-      <button class="footer-btn contact" open-type="contact">联系客服</button>
-      <button class="footer-btn share" open-type="share">分享好友</button>
-    </view>
     <view class="content-end"></view>
   </scroll-view>
 </view>

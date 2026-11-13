@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/home/index",
+    "pages/mine/index",
     "pages/signature/index",
     "pages/file-sign/index",
     "pages/task-sign/index",
@@ -13,6 +14,8 @@
     "pages/handwriting/index",
     "pages/timed-message/index",
     "pages/support/index",
+    "pages/mini-code/index",
+    "pages/about/index",
     "pages/signature/settings",
     "pages/placeholder/index",
     "pages/index/index"
@@ -25,5 +28,15 @@
     "backgroundColor": "#f5f6f8"
   },
   "style": "v2",
+  "tabBar": {
+    "color": "#687586",
+    "selectedColor": "#20B8AA",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      { "pagePath": "pages/home/index", "text": "首页" },
+      { "pagePath": "pages/mine/index", "text": "我的" }
+    ]
+  },
   "sitemapLocation": "sitemap.json"
 }

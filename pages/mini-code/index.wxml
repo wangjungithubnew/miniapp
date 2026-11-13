@@ -1,0 +1,1 @@
+<view class="page"><view class="card"><text class="title">电子签名 · 书法工具</text><text class="desc">打开微信扫一扫，分享这款小程序</text><view class="code-box"><image wx:if="{{codePath}}" src="{{codePath}}" mode="aspectFit" /><text wx:else>{{loading ? '正在生成小程序码…' : '暂无小程序码'}}</text></view><button class="save-btn" disabled="{{!codePath}}" bindtap="saveToAlbum">保存小程序码到相册</button></view></view>
